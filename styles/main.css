@@ -1,0 +1,738 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Form Section */
+.vessel-form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.vessel-form-section h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.vessel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group input:invalid {
+    border-color: #e74c3c;
+}
+
+.form-group input:valid {
+    border-color: #27ae60;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9, #21618c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.btn-secondary.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-secondary.active:hover {
+    background-color: #2980b9;
+}
+
+/* Gantt Timeline Section */
+.gantt-timeline-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.timeline-header h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.timeline-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.terminal-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 6px;
+    border: 1px solid #3498db;
+}
+
+.terminal-filter label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.timeline-select {
+    padding: 8px 12px;
+    border: 2px solid #e1e8ed;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timeline-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.timeline-container {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.timeline-container.collapsed {
+    height: 0;
+    border: none;
+}
+
+/* Custom vis.js Timeline Styling */
+.vis-timeline {
+    font-family: inherit !important;
+    border: none !important;
+}
+
+.vis-panel.vis-background {
+    background-color: #f8f9fa !important;
+}
+
+.vis-panel.vis-center,
+.vis-panel.vis-left,
+.vis-panel.vis-right,
+.vis-panel.vis-top,
+.vis-panel.vis-bottom {
+    border-color: #e1e8ed !important;
+}
+
+/* Timeline axis styling */
+.vis-text {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+}
+
+.vis-time-axis .vis-text {
+    color: #34495e !important;
+}
+
+.vis-labelset .vis-label {
+    color: #2c3e50 !important;
+    border-color: #e1e8ed !important;
+}
+
+/* Group labels */
+.vis-foreground .vis-group {
+    border-color: #e1e8ed !important;
+}
+
+.vis-label {
+    background: linear-gradient(135deg, #34495e, #2c3e50) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-color: #45566e !important;
+}
+
+/* Vessel Type Styling for Timeline Items */
+.vis-item.vessel-type-container {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+    border-color: #2980b9 !important;
+    color: white !important;
+}
+
+.vis-item.vessel-type-roro {
+    background: linear-gradient(135deg, #f39c12, #e67e22) !important;
+    border-color: #e67e22 !important;
+    color: white !important;
+}
+
+.vis-item.vessel-type-bulk {
+    background: linear-gradient(135deg, #27ae60, #229954) !important;
+    border-color: #229954 !important;
+    color: white !important;
+}
+
+.vis-item {
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.vis-item.vis-selected {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3) !important;
+}
+
+.vis-item .vis-item-content {
+    padding: 5px 8px !important;
+}
+
+/* Timeline grid */
+.vis-time-axis .vis-grid.vis-minor {
+    border-color: #f1f3f4 !important;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+    border-color: #e1e8ed !important;
+}
+
+/* Tooltip Styling */
+.vis-tooltip {
+    background: white !important;
+    border: 2px solid #3498db !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    font-family: inherit !important;
+    max-width: 300px !important;
+    padding: 15px !important;
+}
+
+.timeline-tooltip h4 {
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e1e8ed;
+    padding-bottom: 8px;
+}
+
+.timeline-tooltip p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #34495e;
+}
+
+.timeline-tooltip small {
+    color: #7f8c8d;
+    font-style: italic;
+    margin-top: 10px;
+    display: block;
+    border-top: 1px solid #e1e8ed;
+    padding-top: 8px;
+}
+
+/* Drag handles */
+.vis-item .vis-drag-left,
+.vis-item .vis-drag-right {
+    background: white !important;
+    border: 2px solid #3498db !important;
+    border-radius: 50% !important;
+    width: 12px !important;
+    height: 12px !important;
+}
+
+/* Timeline background */
+.vis-itemset {
+    background: white !important;
+}
+
+/* Current time indicator */
+.vis-current-time {
+    background-color: #e74c3c !important;
+    width: 2px !important;
+}
+
+/* Berth Length Visualization */
+.berth-group {
+    position: relative;
+}
+
+.berth-group::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: var(--berth-length);
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+.berth-length-200::after {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.berth-length-250::after {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+.berth-length-300::after {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.berth-length-350::after {
+    background: linear-gradient(90deg, #27ae60, #229954);
+}
+
+.berth-length-400::after {
+    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+/* Berth group labels with length indication */
+.vis-label .berth-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vis-label .berth-group::before {
+    content: '⚓';
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Vessel List Section */
+.vessel-list-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+}
+
+.section-header h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.vessel-count {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+}
+
+.vessel-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.vessel-table th {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vessel-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.vessel-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.vessel-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e1e8ed;
+    font-size: 0.9rem;
+}
+
+.vessel-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.vessel-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+}
+
+.no-data {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 40px !important;
+}
+
+/* Action Buttons */
+.btn-edit {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+
+.btn-edit:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Vessel Type Badges */
+.vessel-type {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vessel-type.container {
+    background-color: #3498db;
+    color: white;
+}
+
+.vessel-type.roro {
+    background-color: #f39c12;
+    color: white;
+}
+
+.vessel-type.bulk {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Context Menu Styles */
+.vessel-context-menu {
+    position: fixed;
+    background: white;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    min-width: 160px;
+    display: none;
+    font-family: inherit;
+}
+
+.vessel-context-menu .menu-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #e1e8ed;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+.vessel-context-menu .menu-item:last-child {
+    border-bottom: none;
+}
+
+.vessel-context-menu .menu-item:hover {
+    background-color: #f8f9fa;
+    color: #3498db;
+}
+
+.vessel-context-menu .menu-item.danger:hover {
+    background-color: #fdf2f2;
+    color: #e74c3c;
+}
+
+.vessel-context-menu .menu-item .icon {
+    width: 16px;
+    height: 16px;
+    font-weight: bold;
+}
+
+/* Edit State Indicators */
+.vessel-editing {
+    background-color: #fff3cd !important;
+    border-left: 4px solid #f39c12 !important;
+}
+
+.vessel-table tbody tr.vessel-editing {
+    background-color: #fff3cd;
+    border-left: 4px solid #f39c12;
+}
+
+.vessel-table tbody tr.vessel-editing:hover {
+    background-color: #ffeeba;
+}
+
+.vis-item.vessel-editing {
+    border: 3px solid #f39c12 !important;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.3) !important;
+}
+
+/* Form Edit State */
+.vessel-form.editing {
+    border: 2px solid #f39c12;
+    background: linear-gradient(135deg, #fff3cd 0%, #ffffff 100%);
+}
+
+.vessel-form.editing .form-header {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+    padding: 15px;
+    margin: -30px -30px 20px -30px;
+    border-radius: 10px 10px 0 0;
+}
+
+.btn-cancel {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-cancel:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .vessel-table {
+        font-size: 0.8rem;
+    }
+    
+    .vessel-table th,
+    .vessel-table td {
+        padding: 10px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .vessel-form-section,
+    .vessel-list-section {
+        padding: 20px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}

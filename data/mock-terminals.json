@@ -1,0 +1,32 @@
+[
+  {
+    "id": "term1",
+    "name": "Container Terminal A",
+    "type": "Container"
+  },
+  {
+    "id": "term2", 
+    "name": "Container Terminal B",
+    "type": "Container"
+  },
+  {
+    "id": "term3",
+    "name": "RoRo Terminal",
+    "type": "RoRo"
+  },
+  {
+    "id": "term4",
+    "name": "Bulk Terminal North",
+    "type": "Bulk"
+  },
+  {
+    "id": "term5",
+    "name": "Bulk Terminal South", 
+    "type": "Bulk"
+  },
+  {
+    "id": "term6",
+    "name": "Multi-Purpose Terminal",
+    "type": "General"
+  }
+]

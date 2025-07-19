@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vessel Scheduling - Port Management System</title>
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- vis.js Timeline CSS and JS -->
+    <link href="https://cdn.jsdelivr.net/npm/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚢 Vessel Scheduling System</h1>
+            <p>Port Berth Planning & Management</p>
+        </header>
+
+        <main>
+            <section class="vessel-form-section">
+                <h2>Add New Vessel Call</h2>
+                <form id="vessel-form" class="vessel-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="voyage-number">Voyage Number * <small>(Format: YYYY-###-[E|W|N|S])</small></label>
+                            <input type="text" id="voyage-number" name="voyageNumber" required 
+                                   placeholder="e.g., 2024-001-E" pattern="^[0-9]{4}-[0-9]{3}-[EWNS]$"
+                                   title="Format: Year-Sequence-Direction (e.g., 2024-001-E)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="vessel-name">Vessel Name *</label>
+                            <input type="text" id="vessel-name" name="vesselName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="operator">Operator</label>
+                            <input type="text" id="operator" name="operator" placeholder="e.g., Maersk Line">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="route-info">Route Info</label>
+                            <input type="text" id="route-info" name="routeInfo" placeholder="e.g., Asia-Europe">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eta">ETA (Estimated Time of Arrival) *</label>
+                            <input type="datetime-local" id="eta" name="eta" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="etd">ETD (Estimated Time of Departure) *</label>
+                            <input type="datetime-local" id="etd" name="etd" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="loa">LOA (Length Overall) - meters *</label>
+                            <input type="number" id="loa" name="loa" min="1" step="0.1" required placeholder="e.g., 300">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="draft">Draft - meters *</label>
+                            <input type="number" id="draft" name="draft" min="0.1" step="0.1" required placeholder="e.g., 12.5">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="terminal">Terminal *</label>
+                            <select id="terminal" name="terminal" required>
+                                <option value="">Select Terminal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="berth">Berth *</label>
+                            <select id="berth" name="berthId" required>
+                                <option value="">Select Terminal First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vessel-type">Vessel Type *</label>
+                            <select id="vessel-type" name="vesselType" required>
+                                <option value="">Select Type</option>
+                                <option value="Container">Container</option>
+                                <option value="RoRo">RoRo</option>
+                                <option value="Bulk">Bulk</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <!-- Placeholder for future field or leave empty -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Add Vessel Call</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                        <button type="button" id="cancel-edit" class="btn-cancel" style="display: none;">Cancel Edit</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="gantt-timeline-section">
+                <div class="timeline-header">
+                    <h2>📅 Berth Timeline</h2>
+                    <div class="timeline-controls">
+                        <div class="terminal-filter">
+                            <label for="terminal-filter">Select Terminal:</label>
+                            <select id="terminal-filter" class="timeline-select">
+                                <option value="">All Terminals</option>
+                            </select>
+                        </div>
+                        <button id="timeline-toggle" class="btn-secondary active">Hide Timeline</button>
+                        <button id="timeline-zoom-in" class="btn-secondary">Zoom In</button>
+                        <button id="timeline-zoom-out" class="btn-secondary">Zoom Out</button>
+                        <select id="timeline-scale" class="timeline-select">
+                            <option value="day">Daily View</option>
+                            <option value="week">Weekly View</option>
+                            <option value="month">Monthly View</option>
+                        </select>
+                        <button id="timeline-today" class="btn-secondary">Go to Today</button>
+                    </div>
+                </div>
+                <div id="timeline-container" class="timeline-container"></div>
+            </section>
+
+            <section class="vessel-list-section">
+                <div class="section-header">
+                    <h2>Scheduled Vessel Calls</h2>
+                    <div class="vessel-count">
+                        <span id="vessel-count">0</span> vessels scheduled
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="vessel-table" class="vessel-table">
+                        <thead>
+                            <tr>
+                                <th>Voyage Number</th>
+                                <th>Vessel Name</th>
+                                <th>Type</th>
+                                <th>Terminal</th>
+                                <th>Berth</th>
+                                <th>ETA</th>
+                                <th>ETD</th>
+                                <th>LOA (m)</th>
+                                <th>Draft (m)</th>
+                                <th>Operator</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vessel-table-body">
+                            <tr class="no-vessels">
+                                <td colspan="11" class="no-data">No vessel calls scheduled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Port Vessel Scheduling System - MVP v1.0</p>
+        </footer>
+    </div>
+
+    <!-- Context Menu for Timeline -->
+    <div id="vessel-context-menu" class="vessel-context-menu">
+        <div class="menu-item" data-action="edit">
+            <span class="icon">✏️</span>
+            <span>Edit Vessel</span>
+        </div>
+        <div class="menu-item danger" data-action="delete">
+            <span class="icon">🗑️</span>
+            <span>Delete Vessel</span>
+        </div>
+    </div>
+
+    <script src="scripts/vessel-manager.js"></script>
+    <script src="scripts/vis-timeline.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

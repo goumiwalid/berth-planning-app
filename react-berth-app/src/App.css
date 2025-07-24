@@ -1,0 +1,88 @@
+/* App-specific styles */
+.App {
+  text-align: center;
+}
+
+/* Custom component styles */
+.dashboard-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.vessel-timeline {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-indicator.planned {
+  background-color: #8c8c8c;
+}
+
+.status-indicator.confirmed {
+  background-color: #1890ff;
+}
+
+.status-indicator.at-berth {
+  background-color: #52c41a;
+}
+
+.status-indicator.completed {
+  background-color: #13c2c2;
+}
+
+.status-indicator.delayed {
+  background-color: #ff4d4f;
+}
+
+.status-indicator.cancelled {
+  background-color: #f5222d;
+}
+
+/* Quick actions */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.quick-actions .ant-btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .ant-typography h1 {
+    font-size: 24px;
+  }
+  
+  .ant-typography h2 {
+    font-size: 20px;
+  }
+  
+  .quick-actions .ant-btn {
+    min-width: 100%;
+  }
+}
